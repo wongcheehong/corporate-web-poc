@@ -17,6 +17,11 @@ export function Header() {
                 About
               </Link>
             </li>
+            <li>
+              <Link to="/posts" className="hover:underline">
+                Posts
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>
