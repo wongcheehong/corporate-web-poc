@@ -1,11 +1,5 @@
-import type { MetaArgs as BaseMetaArgs } from "react-router";
-
-export interface Post {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-}
+import type { MetaArgs as BaseMetaArgs } from 'react-router';
+import type { Post } from '~/types/post';
 
 export namespace Route {
   export type MetaArgs = BaseMetaArgs;

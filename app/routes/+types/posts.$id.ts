@@ -1,5 +1,5 @@
-import type { MetaArgs as BaseMetaArgs } from "react-router";
-import type { Post } from "./posts";
+import type { MetaArgs as BaseMetaArgs } from 'react-router';
+import type { Post } from '~/types/post';
 
 export namespace Route {
   export type MetaArgs = BaseMetaArgs;
