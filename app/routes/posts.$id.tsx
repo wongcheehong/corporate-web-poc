@@ -1,6 +1,7 @@
-import { Link } from 'react-router';
+import { Link, useNavigation } from 'react-router';
 import type { Route } from './+types/posts.$id';
 import { Header } from '../components/Header';
+import { LoadingSpinner } from '~/components/Spinner';
 
 export function meta({ params }: Route.MetaArgs) {
   return [
@@ -20,6 +21,9 @@ export async function clientLoader({ params }: Route.ClientLoaderArgs) {
 }
 
 export default function Post({ loaderData }: Route.ComponentProps) {
+  const navigation = useNavigation();
+  const isLoading = navigation.state === 'loading';
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -47,16 +51,22 @@ export default function Post({ loaderData }: Route.ComponentProps) {
               Back to Posts
             </Link>
           </div>
-          <article className="bg-white p-8 rounded-lg shadow-sm border border-gray-200">
-            <h1 className="text-3xl font-bold mb-6 text-gray-900">
-              {loaderData.title}
-            </h1>
-            <div className="prose max-w-none">
-              <p className="text-gray-700 whitespace-pre-line">
-                {loaderData.body}
-              </p>
+          {isLoading ? (
+            <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-200 flex justify-center items-center py-20">
+              <LoadingSpinner className="text-blue-600" />
             </div>
-          </article>
+          ) : (
+            <article className="bg-white p-8 rounded-lg shadow-sm border border-gray-200">
+              <h1 className="text-3xl font-bold mb-6 text-gray-900">
+                {loaderData.title}
+              </h1>
+              <div className="prose max-w-none">
+                <p className="text-gray-700 whitespace-pre-line">
+                  {loaderData.body}
+                </p>
+              </div>
+            </article>
+          )}
         </div>
       </main>
       <footer className="bg-gray-100 p-4 text-center text-gray-600">
