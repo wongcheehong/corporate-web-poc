@@ -6,10 +6,13 @@ import {
   Scripts,
   ScrollRestoration,
 } from 'react-router';
+import { Suspense, useEffect } from 'react';
+import { I18nextProvider } from 'react-i18next';
 
 import type { Route } from './+types/root';
 import './app.css';
 import { LoadingSpinner } from './components/Spinner';
+import i18n from './lib/i18n';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -25,8 +28,18 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  // Initialize i18next on client-side
+  useEffect(() => {
+    // This ensures i18next is initialized on the client side
+    if (typeof window !== 'undefined') {
+      import('./lib/i18n').then(() => {
+        // i18next initialized
+      });
+    }
+  }, []);
+
   return (
-    <html lang="en">
+    <html lang={i18n.language}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -34,7 +47,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
+        <I18nextProvider i18n={i18n}>
+          <Suspense fallback={<LoadingSpinner />}>
+            {children}
+          </Suspense>
+        </I18nextProvider>
         <ScrollRestoration />
         <Scripts />
       </body>

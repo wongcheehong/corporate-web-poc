@@ -1,0 +1,11 @@
+{
+  "app": {
+    "title": "Laman Web Korporat",
+    "loading": "Sedang Memuat..."
+  },
+  "navigation": {
+    "home": "Laman Utama",
+    "about": "Tentang Kami",
+    "posts": "Artikel"
+  }
+}

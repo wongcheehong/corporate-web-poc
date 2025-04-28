@@ -1,0 +1,11 @@
+{
+  "app": {
+    "title": "Corporate Web",
+    "loading": "Loading..."
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "posts": "Posts"
+  }
+}
