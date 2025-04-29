@@ -34,8 +34,10 @@ i18n
     
     // Detect language options
     detection: {
-      // Order of detection methods
+      // Order of detection methods - path is first priority
       order: ['path', 'cookie', 'localStorage', 'navigator', 'htmlTag'],
+      // Path detection options
+      lookupFromPathIndex: 0,
       // Cookie options
       lookupCookie: 'i18next',
       lookupLocalStorage: 'i18nextLng',

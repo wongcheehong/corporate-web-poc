@@ -1,19 +1,15 @@
-import { useTranslation } from 'react-i18next';
+import { useLanguage, SUPPORTED_LANGUAGES } from '../lib/languageUtils';
 
 export function LanguageSwitcher() {
-  const { i18n } = useTranslation();
-
-  const changeLanguage = (lng: string) => {
-    i18n.changeLanguage(lng);
-  };
+  const { currentLanguage, changeLanguage } = useLanguage();
 
   return (
     <div className="flex items-center space-x-2">
-      {['en', 'ms'].map((lng) => (
+      {SUPPORTED_LANGUAGES.map((lng) => (
         <button
           key={lng}
           className={`px-2 py-1 text-sm font-medium rounded ${
-            i18n.language === lng
+            currentLanguage === lng
               ? 'bg-white text-blue-700 shadow-sm'
               : 'bg-blue-700 text-white/80 hover:text-white border border-white/20'
           }`}

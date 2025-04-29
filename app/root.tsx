@@ -5,6 +5,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useParams,
 } from 'react-router';
 import { Suspense, useEffect } from 'react';
 import { I18nextProvider } from 'react-i18next';
@@ -13,6 +14,7 @@ import type { Route } from './+types/root';
 import './app.css';
 import { LoadingSpinner } from './components/Spinner';
 import i18n from './lib/i18n';
+import { getLanguageFromParams } from './lib/languageUtils';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -28,18 +30,24 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const { lang } = useParams();
+
   // Initialize i18next on client-side
   useEffect(() => {
     // This ensures i18next is initialized on the client side
     if (typeof window !== 'undefined') {
       import('./lib/i18n').then(() => {
-        // i18next initialized
+        // Set language based on URL parameter
+        const language = getLanguageFromParams(lang);
+        if (i18n.language !== language) {
+          i18n.changeLanguage(language);
+        }
       });
     }
-  }, []);
+  }, [lang]);
 
   return (
-    <html lang={i18n.language}>
+    <html lang={lang}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -48,9 +56,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <I18nextProvider i18n={i18n}>
-          <Suspense fallback={<LoadingSpinner />}>
-            {children}
-          </Suspense>
+          <Suspense fallback={<LoadingSpinner />}>{children}</Suspense>
         </I18nextProvider>
         <ScrollRestoration />
         <Scripts />
