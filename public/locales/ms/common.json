@@ -7,5 +7,39 @@
     "home": "Laman Utama",
     "about": "Tentang Kami",
     "posts": "Artikel"
+  },
+  "home": {
+    "welcome": "Selamat Datang ke Laman Web Korporat",
+    "description": "Ini adalah laman web korporat ringkas yang dibina dengan React Router v7 dan Tailwind CSS.",
+    "mission": {
+      "title": "Misi Kami",
+      "content": "Untuk menyediakan penyelesaian inovatif yang membantu perniagaan berkembang dalam era digital."
+    }
+  },
+  "about": {
+    "title": "Tentang Kami",
+    "story": {
+      "title": "Kisah Kami",
+      "content1": "Ditubuhkan pada tahun 2025, Laman Web Korporat telah menjadi perintis dalam pembangunan web dan transformasi digital. Kami mengkhusus dalam mencipta aplikasi web moden, responsif, dan mesra pengguna menggunakan teknologi terkini.",
+      "content2": "Pasukan pembangun dan pereka kami yang berpengalaman berdedikasi untuk menyampaikan penyelesaian berkualiti tinggi yang memenuhi keperluan unik pelanggan kami."
+    },
+    "values": {
+      "title": "Nilai-Nilai Kami",
+      "items": [
+        "Inovasi dan kreativiti dalam segala yang kami lakukan",
+        "Kepuasan pelanggan sebagai keutamaan tertinggi kami",
+        "Pembelajaran dan penambahbaikan berterusan",
+        "Kerjasama dan kerja berpasukan"
+      ]
+    }
+  },
+  "posts": {
+    "title": "Artikel",
+    "readMore": "Baca lagi",
+    "backToPosts": "Kembali ke Artikel",
+    "error": "Gagal mendapatkan artikel"
+  },
+  "footer": {
+    "copyright": " Laman Web Korporat. Hak cipta terpelihara."
   }
 }

@@ -1,14 +1,9 @@
-import { Link, useNavigation } from 'react-router';
+import { href, Link, useNavigation } from 'react-router';
 import type { Route } from './+types/posts.$id';
 import { Header } from '../components/Header';
 import { LoadingSpinner } from '~/components/Spinner';
-
-export function meta({ params }: Route.MetaArgs) {
-  return [
-    { title: `Post ${params.id} | Corporate Web` },
-    { name: 'description', content: `View post ${params.id} details` },
-  ];
-}
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '~/lib/languageUtils';
 
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
   const response = await fetch(
@@ -21,8 +16,11 @@ export async function clientLoader({ params }: Route.ClientLoaderArgs) {
 }
 
 export default function Post({ loaderData }: Route.ComponentProps) {
+  const { t } = useTranslation();
+  const { hrefLang } = useLanguage();
   const navigation = useNavigation();
   const isLoading = navigation.state === 'loading';
+  const currentYear = new Date().getFullYear();
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -31,7 +29,7 @@ export default function Post({ loaderData }: Route.ComponentProps) {
         <div className="max-w-4xl mx-auto">
           <div className="mb-4">
             <Link
-              to="/posts"
+              to={href('/:lang?/posts', { lang: hrefLang })}
               className="text-blue-600 hover:text-blue-800 flex items-center"
             >
               <svg
@@ -48,7 +46,7 @@ export default function Post({ loaderData }: Route.ComponentProps) {
                   d="M15 19l-7-7 7-7"
                 ></path>
               </svg>
-              Back to Posts
+              {t('posts.backToPosts')}
             </Link>
           </div>
           {isLoading ? (
@@ -70,7 +68,7 @@ export default function Post({ loaderData }: Route.ComponentProps) {
         </div>
       </main>
       <footer className="bg-gray-100 p-4 text-center text-gray-600">
-        <p>© {new Date().getFullYear()} Corporate Web. All rights reserved.</p>
+        <p>{t('footer.copyright', { year: currentYear })}</p>
       </footer>
     </div>
   );

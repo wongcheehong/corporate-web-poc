@@ -7,5 +7,57 @@
     "home": "Home",
     "about": "About",
     "posts": "Posts"
+  },
+  "home": {
+    "welcome": "Welcome to Corporate Web",
+    "description": "This is a simple corporate website built with React Router v7 and Tailwind CSS.",
+    "mission": {
+      "title": "Our Mission",
+      "content": "To provide innovative solutions that help businesses thrive in the digital age."
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "story": {
+      "title": "Our Story",
+      "content1": "Founded in 2025, Corporate Web has been at the forefront of web development and digital transformation. We specialize in creating modern, responsive, and user-friendly web applications using cutting-edge technologies.",
+      "content2": "Our team of experienced developers and designers is dedicated to delivering high-quality solutions that meet the unique needs of our clients."
+    },
+    "values": {
+      "title": "Our Values",
+      "items": [
+        "Innovation and creativity in everything we do",
+        "Customer satisfaction as our top priority",
+        "Continuous learning and improvement",
+        "Collaboration and teamwork"
+      ]
+    }
+  },
+  "posts": {
+    "title": "Posts",
+    "readMore": "Read more",
+    "backToPosts": "Back to Posts",
+    "error": "Failed to fetch posts"
+  },
+  "footer": {
+    "copyright": " Corporate Web. All rights reserved."
+  },
+  "meta": {
+    "home": {
+      "title": "Home | Corporate Web",
+      "description": "Welcome to Corporate Web!"
+    },
+    "about": {
+      "title": "About | Corporate Web",
+      "description": "Learn more about Corporate Web"
+    },
+    "posts": {
+      "title": "Posts | Corporate Web",
+      "description": "Blog posts from Corporate Web"
+    },
+    "post": {
+      "title": "Post {{id}} | Corporate Web",
+      "description": "View post {{id}} details"
+    }
   }
 }

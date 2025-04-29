@@ -1,15 +1,10 @@
-import { Link, useNavigation } from 'react-router';
+import { href, Link, useNavigation } from 'react-router';
 import type { Route } from './+types/posts';
 import { Header } from '../components/Header';
 import type { Post } from '~/types/post';
 import { LoadingSpinner } from '~/components/Spinner';
-
-export function meta({}: Route.MetaArgs) {
-  return [
-    { title: 'Posts | Corporate Web' },
-    { name: 'description', content: 'Blog posts from Corporate Web' },
-  ];
-}
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '~/lib/languageUtils';
 
 export async function clientLoader() {
   const response = await fetch('https://jsonplaceholder.typicode.com/posts');
@@ -20,16 +15,18 @@ export async function clientLoader() {
 }
 
 export default function Posts({ loaderData }: Route.ComponentProps) {
+  const { t } = useTranslation();
+  const { hrefLang } = useLanguage();
   const navigation = useNavigation();
   const isLoading = navigation.state === "loading";
-  
+  const currentYear = new Date().getFullYear();
 
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-grow container mx-auto p-6">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl font-bold mb-6">Posts</h1>
+          <h1 className="text-3xl font-bold mb-6">{t('posts.title')}</h1>
           {isLoading ? (
             <div className="flex justify-center items-center py-20">
               <LoadingSpinner className="text-blue-600" />
@@ -43,7 +40,7 @@ export default function Posts({ loaderData }: Route.ComponentProps) {
                 >
                   <h2 className="text-xl font-semibold mb-2">
                     <Link
-                      to={`/posts/${post.id}`}
+                      to={href('/:lang?/posts/:id', { lang: hrefLang, id: post.id.toString() })}
                       className="text-blue-600 hover:text-blue-800 hover:underline"
                     >
                       {post.title}
@@ -52,10 +49,10 @@ export default function Posts({ loaderData }: Route.ComponentProps) {
                   <p className="text-gray-600 line-clamp-2">{post.body}</p>
                   <div className="mt-4">
                     <Link
-                      to={`/posts/${post.id}`}
+                      to={href('/:lang?/posts/:id', { lang: hrefLang, id: post.id.toString() })}
                       className="inline-flex items-center text-sm text-blue-600 hover:text-blue-800"
                     >
-                      Read more
+                      {t('posts.readMore')}
                       <svg
                         className="w-4 h-4 ml-1"
                         fill="none"
@@ -79,9 +76,7 @@ export default function Posts({ loaderData }: Route.ComponentProps) {
         </div>
       </main>
       <footer className="bg-gray-100 p-4 text-center text-gray-600">
-        <p>
-          &copy; {new Date().getFullYear()} Corporate Web. All rights reserved.
-        </p>
+        <p>{t('footer.copyright', { year: currentYear })}</p>
       </footer>
     </div>
   );
